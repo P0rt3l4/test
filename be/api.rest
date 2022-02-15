@@ -1,0 +1,36 @@
+###
+###
+GET http://localhost:3000/api/users
+###
+POST  http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "username": "Sergio1 Portela",
+    "password": "Junior Developer",
+    "perfil_id": "3",
+    "correo": "GDL@gdl.com",
+    "telefono": "3333333333",
+    "usuario_id_creacion": "1",
+    "usuario_id_actualizacion": "1",
+    "token_expiracion": null,
+    "estatus": "1"
+}
+
+###
+GET http://localhost:3000/api/users/2
+
+###
+DELETE  http://localhost:3000/api/users/14
+
+###
+PUT http://localhost:3000/api/users/2
+Content-Type: application/json
+
+{
+    "id": 2,
+    "username": "prueba23",
+    "correo": "pruebas2@gmail.com",
+    "telefono": "1234567890",
+    "estatus": 1
+}
