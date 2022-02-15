@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dataUser" (click)="resetForm(userForm)">
+            Create User
+        </button>
+    </div>
+    <div class="col-md-10">
+        <table class="table table-striper">
+            <thead>
+                <tr>
+                    <th>User name</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of UserService.Users">
+                    <td>{{user.username}}</td>
+                    <td>{{user.correo}}</td>
+                    <td>{{user.telefono}}</td>
+                    <td>
+                        <button class="btn btn-secondaty" (click)="editUser(user)" data-bs-toggle="modal" data-bs-target="#updateUser">Edit</button>
+                        <button class="btn btn-danger" (click)="deleteUser(user.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateUserLabel">Update user</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form #userForm="ngForm" (ngSubmit)="formUser(userForm)">
+                                <div class="form-group mb-4">
+                                    <input type="hidden" class="form-control" name="id" id="id" 
+                                    [(ngModel)]="UserService.dataUser.id">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <input type="text" class="form-control" name="username" id="username" 
+                                        placeholder="Enter your UserName" required minlength="6" ngModel matInput
+                                        [(ngModel)]="UserService.dataUser.username">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <input type="password" class="form-control" name="password" id="password" 
+                                    placeholder="Enter your Password" minlength="6" [(ngModel)]="UserService.dataUser.password" matInput ngModel>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <input type="email" class="form-control" name="correo" id="correo" 
+                                    placeholder="Enter your Email" required minlength="6" ngModel matInput
+                                    [(ngModel)]="UserService.dataUser.correo">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <input type="tel" class="form-control" name="telefono" id="telefono" 
+                                        placeholder="Enter your Phone" required minlength="10" ngModel matInput 
+                                        [(ngModel)]="UserService.dataUser.telefono">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <select name="estatus" id="estatus" class="form-control" [(ngModel)]="UserService.dataUser.estatus" ngModel matInput>
+                                        <option value=""select>Selecciona una opcion</option>
+                                        <option value="1"select>Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary mr-2" (click)="resetForm(userForm)">
+                                    Clean
+                                </button>
+                                <button class="btn btn-secundary" [disabled]="userForm.invalid">
+                                    Save User
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="dataUser" tabindex="-1" aria-labelledby="dataUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dataUserLabel">Add User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form #userForm="ngForm" (ngSubmit)="formUser(userForm)">
+                                <div class="form-group mb-4">
+                                    <input type="text" class="form-control" name="username" id="username" 
+                                        placeholder="Enter your UserName" required minlength="6" ngModel matInput
+                                        [(ngModel)]="UserService.dataUser.username">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <input type="password" class="form-control" name="password" id="password" 
+                                    placeholder="Enter your Password" minlength="6" [(ngModel)]="UserService.dataUser.password">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <input type="email" class="form-control" name="correo" id="correo" 
+                                    placeholder="Enter your Email" required minlength="6" ngModel matInput 
+                                    [(ngModel)]="UserService.dataUser.correo">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <input type="tel" class="form-control" name="telefono" id="telefono" 
+                                        placeholder="Enter your Phone" required minlength="10" ngModel matInput 
+                                        [(ngModel)]="UserService.dataUser.telefono">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <select name="estatus" id="estatus" class="form-control" [(ngModel)]="UserService.dataUser.estatus" ngModel matInput >
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary mr-2" (click)="resetForm(userForm)">
+                                    Clean
+                                </button>
+                                <button class="btn btn-secundary" [disabled]="userForm.invalid">
+                                    Save User
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
